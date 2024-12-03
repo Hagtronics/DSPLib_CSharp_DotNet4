@@ -18,7 +18,7 @@ DSP oriented routines released under the very non-restrictive MIT License.
   4) Many worked examples.
 
 # Usage:
-See the full PDF Users guide at,  
+* See the full PDF Users guide at,  
 https://github.com/Hagtronics/DSPLib_CSharp_DotNet4/blob/main/docs/DSPLib%20-%20FFT%20_%20DFT%20Fourier%20Transform%20Library%20for%20DotNet%204.pdf  
-The example project is in the 'examples' directory.  
-The C# source code for use in your projects is in the 'src' directory.  
+* The example project is in the 'examples' directory.  
+* The C# source code for use in your projects is in the 'src' directory.  
