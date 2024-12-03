@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DSPLib_Test</name>
+    </assembly>
+    <members>
+        <member name="T:DSPLib.DFT">
+             Performs a complex DFT w/Optimizations for .NET >= 4.
+            
+             Released under the MIT License
+            
+             DFT Core Functions Copyright (c) 2016 Steven C. Hageman
+            
+             Permission is hereby granted, free of charge, to any person obtaining a copy
+             of this software and associated documentation files (the "Software"), to
+             deal in the Software without restriction, including without limitation the
+             rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+             sell copies of the Software, and to permit persons to whom the Software is
+             furnished to do so, subject to the following conditions:
+            
+             The above copyright notice and this permission notice shall be included in
+             all copies or substantial portions of the Software.
+            
+             THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+             IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+             FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+             AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+             LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+             FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+             IN THE SOFTWARE.
+            <summary>
+            DFT Base Class
+            </summary>
+        </member>
+        <member name="M:DSPLib.DFT.#ctor">
+            <summary>
+            DFT Class
+            </summary>
+        </member>
+        <member name="P:DSPLib.DFT.IsUsingCached">
+            <summary>
+            Read only Boolean property. True meas the currently defined DFT is using cached memory to speed up calculations.
+            </summary>
+        </member>
+        <member name="M:DSPLib.DFT.Initialize(System.UInt32,System.UInt32,System.Boolean)">
+            <summary>
+            Pre-Initializes the DFT.
+            Must call first and this anytime the FFT setup changes.
+            </summary>
+            <param name="inputDataLength"></param>
+            <param name="zeroPaddingLength"></param>
+            <param name="forceNoCache">True will force the DFT to not use pre-calculated caching.</param>
+        </member>
+        <member name="M:DSPLib.DFT.Execute(System.Double[])">
+            <summary>
+            Execute the DFT for 'real' inputs.
+            </summary>
+            <param name="timeSeries"></param>
+            <returns>Complex[] FFT Result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.Execute(System.Numerics.Complex[])">
+            <summary>
+            Execute the DFT for 'complex' inputs.
+            </summary>
+            <param name="complexSeries"></param>
+            <returns>Complex[] FFT Result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.Dft(System.Double[])">
+            <summary>
+            A brute force DFT for 'real' input data - Uses Task / Parallel pattern
+            </summary>
+            <param name="timeSeries"></param>
+            <returns>Complex[] result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.DftCached(System.Double[])">
+            <summary>
+            DFT for 'real' input data with Pre-calculated Sin/Cos arrays + Task / Parallel pattern.
+            DFT can only be so big before the computer runs out of memory and has to use
+            the brute force DFT.
+            </summary>
+            <param name="timeSeries"></param>
+            <returns>Complex[] result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.Dft(System.Numerics.Complex[])">
+            <summary>
+            A brute force DFT for 'complex' input data - Uses Task / Parallel pattern
+            </summary>
+            <param name="complexSeries"></param>
+            <returns>Complex[] result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.DftCached(System.Numerics.Complex[])">
+            <summary>
+            DFT for 'complex' input data with Pre-calculated Sin/Cos arrays + Task / Parallel pattern.
+            DFT can only be so big before the computer runs out of memory and has to use
+            the brute force DFT.
+            </summary>
+            <param name="complexSeries"></param>
+            <returns>Complex[] result</returns>
+        </member>
+        <member name="M:DSPLib.DFT.FrequencySpan(System.Double)">
+            <summary>
+            Return the Frequency Array for the currently defined DFT.
+            Takes into account the total number of points and zero padding points that were defined.
+            </summary>
+            <param name="samplingFrequencyHz"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DSPLib.FFT">
+             Performs an in-place complex FFT.
+            
+             Released under the MIT License
+            
+             Core FFT class based on,
+                  Fast C# FFT - Copyright (c) 2010 Gerald T. Beauregard
+            
+             Changes to: Interface, scaling, zero padding, return values.
+             Change to .NET Complex output types and integrated with my DSP Library. 
+             Note: Complex Number Type requires .NET >= 4.0
+             
+             These changes as noted above Copyright (c) 2016 Steven C. Hageman
+            
+             
+             Permission is hereby granted, free of charge, to any person obtaining a copy
+             of this software and associated documentation files (the "Software"), to
+             deal in the Software without restriction, including without limitation the
+             rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+             sell copies of the Software, and to permit persons to whom the Software is
+             furnished to do so, subject to the following conditions:
+            
+             The above copyright notice and this permission notice shall be included in
+             all copies or substantial portions of the Software.
+            
+             THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+             IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+             FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+             AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+             LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+             FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+             IN THE SOFTWARE.
+            <summary>
+            FFT Base Class
+            </summary>
+        </member>
+        <member name="M:DSPLib.FFT.#ctor">
+            <summary>
+            FFT Class
+            </summary>
+        </member>
+        <member name="M:DSPLib.FFT.Initialize(System.UInt32,System.UInt32)">
+            <summary>
+            Initialize the FFT. Must call first and this anytime the FFT setup changes.
+            </summary>
+            <param name="inputDataLength"></param>
+            <param name="zeroPaddingLength"></param>
+        </member>
+        <member name="M:DSPLib.FFT.Execute(System.Double[])">
+            <summary>
+            Executes a FFT of the REAL input series.
+            </summary>
+            <param name="timeSeries"></param>
+            <returns>Complex[] Spectrum</returns>
+        </member>
+        <member name="M:DSPLib.FFT.Execute(System.Numerics.Complex[])">
+            <summary>
+            Executes a FFT of the COMPLEX input series.
+            </summary>
+            <param name="complexSeries"></param>
+            <returns>Complex[] Spectrum</returns>
+        </member>
+        <member name="M:DSPLib.FFT.BitReverse(System.UInt32,System.UInt32)">
+             Do bit reversal of specified number of places of an int
+             For example, 1101 bit-reversed is 1011
+            
+             @param   x       Number to be bit-reverse.
+             @param   numBits Number of bits in the number.
+        </member>
+        <member name="M:DSPLib.FFT.FrequencySpan(System.Double)">
+            <summary>
+            Return the Frequency Array for the currently defined FFT.
+            Takes into account the total number of points and zero padding points that were defined.
+            </summary>
+            <param name="samplingFrequencyHz"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DSPLib.DSP.Generate.LinSpace(System.Double,System.Double,System.UInt32)">
+            <summary>
+            Generate linearly spaced array. Like the Octave function of the same name.
+            EX: DSP.Generate.LinSpace(1, 10, 10) -> Returns array: 1, 2, 3, 4....10.
+            </summary>
+            <param name="startVal">Any value</param>
+            <param name="stopVal">Any value > startVal</param>
+            <param name="points">Number of points to generate</param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Generate.ToneSampling(System.Double,System.Double,System.Double,System.UInt32,System.Double,System.Double)">
+            <summary>
+            Generates a Sine Wave Tone using Sampling Terms.
+            </summary>
+            <param name="amplitudeVrms"></param>
+            <param name="frequencyHz"></param>
+            <param name="samplingFrequencyHz"></param>
+            <param name="points"></param>
+            <param name="dcV">[Optional] DC Voltage offset</param>
+            <param name="phaseDeg">[Optional] Phase of signal in degrees</param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Generate.ToneCycles(System.Double,System.Double,System.UInt32,System.Double,System.Double)">
+            <summary>
+            Generates a Sine Wave Tone using Number of Cycles Terms.
+            </summary>
+            <param name="amplitudeVrms"></param>
+            <param name="cycles"></param>
+            <param name="points"></param>
+            <param name="dcV">[Optional] DC Voltage offset</param>
+            <param name="phaseDeg">[Optional] Phase of signal in degrees</param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Generate.NoisePsd(System.Double,System.Double,System.UInt32)">
+            <summary>
+            Generates a normal distribution noise signal of the specified power spectral density (Vrms / rt-Hz).
+            </summary>
+            <param name="amplitudePsd (Vrms / rt-Hz)(Vrms/rt-Hz)"></param>
+            <param name="samplingFrequencyHz"></param>
+            <param name="points"></param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Generate.NoiseRms(System.Double,System.UInt32,System.Double)">
+            <summary>
+            Generates a normal distribution noise signal of the specified Volts RMS.
+            </summary>
+            <param name="amplitudeVrms"></param>
+            <param name="points"></param>
+            <param name="dcV"></param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="T:DSPLib.DSP.Window">
+            
+             Many of the windows functions are based on the article,
+            
+               Spectrum and spectral density estimation by the Discrete Fourier
+               transform (DFT), including a comprehensive list of window
+               functions and some new ﬂat-top windows.
+            
+               G. Heinzel, A. Rudiger and R. Schilling,
+               Max-Planck-Institut fur Gravitationsphysik
+             
+               February 15, 2002
+            
+            
+        </member>
+        <member name="T:DSPLib.DSP.Window.Type">
+            <summary>
+            ENUM Types for included Windows.
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Window.ScaleFactor.Signal(System.Double[])">
+            <summary>
+            Calculate Signal scale factor from window coefficient array.
+            Designed to be applied to the "Magnitude" result.
+            </summary>
+            <param name="windowCoefficients"></param>
+            <returns>double scaleFactor</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Window.ScaleFactor.Noise(System.Double[],System.Double)">
+            <summary>
+             Calculate Noise scale factor from window coefficient array.
+             Takes into account the bin width in Hz for the final result also.
+             Designed to be applied to the "Magnitude" result.
+            </summary>
+            <param name="windowCoefficients"></param>
+            <param name="samplingFrequencyHz"></param>
+            <returns>double scaleFactor</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Window.ScaleFactor.NENBW(System.Double[])">
+            <summary>
+             Calculate Normalized, Equivalent Noise BandWidth from window coefficient array.
+            </summary>
+            <param name="windowCoefficients"></param>
+            <returns>double NENBW</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Window.Coefficients(DSPLib.DSP.Window.Type,System.UInt32)">
+            <summary>
+            Calculates a set of Windows coefficients for a given number of points and a window type to use.
+            </summary>
+            <param name="windowName"></param>
+            <param name="points"></param>
+            <returns>double[] array of the calculated window coefficients</returns>
+        </member>
+        <member name="T:DSPLib.DSP.ConvertMagnitude">
+            <summary>
+            DFT / FFT Format Conversion Functions
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertMagnitude.ToMagnitudeSquared(System.Double[])">
+            <summary>
+            Convert Magnitude FT Result to: Magnitude Squared Format
+            </summary>
+            <param name="magnitude"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertMagnitude.ToMagnitudeDBV(System.Double[])">
+            <summary>
+            Convert Magnitude FT Result to: Magnitude dBVolts
+            </summary>
+            <param name="magnitude"></param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="T:DSPLib.DSP.ConvertMagnitudeSquared">
+            <summary>
+            DFT / FFT Format Conversion Functions
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertMagnitudeSquared.ToMagnitude(System.Double[])">
+            <summary>
+            Convert Magnitude Squared FFT Result to: Magnitude Vrms
+            </summary>
+            <param name="magSquared"></param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertMagnitudeSquared.ToMagnitudeDBV(System.Double[])">
+            <summary>
+            Convert Magnitude Squared FFT Result to: Magnitude dBVolts
+            </summary>
+            <param name="magSquared"></param>
+            <returns>double[] array</returns>
+        </member>
+        <member name="T:DSPLib.DSP.ConvertComplex">
+            <summary>
+            DFT / FFT Format Conversion Functions.
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertComplex.ToMagnitudeSquared(System.Numerics.Complex[])">
+            <summary>
+            Convert Complex DFT/FFT Result to: Magnitude Squared V^2 rms
+            </summary>
+            <param name="rawFFT"></param>
+            <returns>double[] MagSquared Format</returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertComplex.ToMagnitude(System.Numerics.Complex[])">
+            <summary>
+            Convert Complex DFT/FFT Result to: Magnitude Vrms
+            </summary>
+            <param name="rawFFT"></param>
+            <returns>double[] Magnitude Format (Vrms)</returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertComplex.ToMagnitudeDBV(System.Numerics.Complex[])">
+            <summary>
+            Convert Complex DFT/FFT Result to: Log Magnitude dBV
+            </summary>
+            <param name="rawFFT"> Complex[] input array"></param>
+            <returns>double[] Magnitude Format (dBV)</returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertComplex.ToPhaseDegrees(System.Numerics.Complex[])">
+            <summary>
+            Convert Complex DFT/FFT Result to: Phase in Degrees
+            </summary>
+            <param name="rawFFT"> Complex[] input array"></param>
+            <returns>double[] Phase (Degrees)</returns>
+        </member>
+        <member name="M:DSPLib.DSP.ConvertComplex.ToPhaseRadians(System.Numerics.Complex[])">
+            <summary>
+            Convert Complex DFT/FFT Result to: Phase in Radians
+            </summary>
+            <param name="rawFFT"> Complex[] input array"></param>
+            <returns>double[] Phase (Degrees)</returns>
+        </member>
+        <member name="T:DSPLib.DSP.Analyze">
+            <summary>
+            DFT / FFT Output Analysis Functions
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.FindRms(System.Double[],System.UInt32,System.UInt32)">
+            <summary>
+            Find the RMS value of a[].
+            </summary>
+            <param name="a"> = of N data points, 0 based.</param>
+            <param name="startBin"> = Bin FROM START to start the counting at (0 based)."></param>
+            <param name="stopBin"> = Bin FROM END to stop counting at (Max = N - 1)."></param>
+            <returns>RMS value of input array between start and stop bins.</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.FindMean(System.Double[],System.UInt32,System.UInt32)">
+            <summary>
+            Finds the mean of the input array.
+            </summary>
+            <param name="inData"> = of N data points, 0 based.</param>
+            <param name="startBin"> = Bin FROM START to start the counting at (0 based)."></param>
+            <param name="stopBin"> = Bin FROM END to stop counting at (Max = N - 1)."></param>
+            <returns>Mean value of input array between start and stop bins.</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.FindMaxAmplitude(System.Double[])">
+            <summary>
+            Finds the maximum value in an array.
+            </summary>
+            <param name="inData"></param>
+            <returns>Maximum value of input array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.FindMaxPosition(System.Double[])">
+            <summary>
+            Finds the position in the inData array where the maximum value happens.
+            </summary>
+            <param name="inData"></param>
+            <returns>Position of maximum value in input array</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.FindMaxFrequency(System.Double[],System.Double[])">
+            <summary>
+            Finds the maximum frequency from the given inData and fSpan arrays.
+            </summary>
+            <param name="inData"></param>
+            <param name="fSpan"></param>
+            <returns>Maximum frequency from input arrays</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.UnwrapPhaseDegrees(System.Double[])">
+            <summary>
+            Unwraps the phase so that it is continuous, without jumps.
+            </summary>
+            <param name="inPhaseDeg">Array of Phase Data from FT in Degrees</param>
+            <returns>Continuous Phase data</returns>
+        </member>
+        <member name="M:DSPLib.DSP.Analyze.UnwrapPhaseRadians(System.Double[])">
+            <summary>
+            Unwraps the phase so that it is continuous, without jumps.
+            </summary>
+            <param name="inPhaseRad">Array of Phase Data from FT in Radians</param>
+            <returns>Continuous Phase data</returns>
+        </member>
+        <member name="T:DSPLib.DSP.Math">
+            <summary>
+            Double[] Array Math Operations (All Static)
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Multiply(System.Numerics.Complex[],System.Double[])">
+            <summary>
+            Complex result[] = Complex a[] * Double b[]
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Multiply(System.Double[],System.Double[])">
+            <summary>
+            result[] = a[] * b[]
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Multiply(System.Double[],System.Double)">
+            <summary>
+            result[] = a[] * b
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Add(System.Double[],System.Double[])">
+            <summary>
+            result[] = a[] + b[]
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Add(System.Double[],System.Double)">
+            <summary>
+            result[] = a[] + b
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Subtract(System.Double[],System.Double[])">
+            <summary>
+            result[] = a[] - b[]
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Subtract(System.Double[],System.Double)">
+            <summary>
+            result[] = a[] - b
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Divide(System.Double[],System.Double[])">
+            <summary>
+            result[] = a[] / b[]
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Divide(System.Double[],System.Double)">
+            <summary>
+            result[] = a[] / b
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Sqrt(System.Double[])">
+            <summary>
+            Square root of a[].
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Square(System.Double[])">
+            <summary>
+            Squares a[].
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.Log10(System.Double[])">
+            <summary>
+            Log10 a[].
+            </summary>
+        </member>
+        <member name="M:DSPLib.DSP.Math.RemoveMean(System.Double[])">
+            <summary>
+            Removes mean value from a[].
+            </summary>
+        </member>
+        <member name="F:DSPLib_Test.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DSPLib_Test.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DSPLib_Test.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:DSPLib_Test.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:DSPLib_Test.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DSPLib_Test.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DSPLib_Test.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:PlotWrapper.Plot.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:PlotWrapper.Plot.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:PlotWrapper.Plot.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

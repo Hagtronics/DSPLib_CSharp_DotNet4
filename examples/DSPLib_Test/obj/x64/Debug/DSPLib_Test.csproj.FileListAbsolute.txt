@@ -1,0 +1,12 @@
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\bin\x64\Debug\DSPLib_Test.exe.config
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\bin\x64\Debug\DSPLib_Test.exe
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\bin\x64\Debug\DSPLib_Test.pdb
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\bin\x64\Debug\DSPLib_Test.XML
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.csproj.AssemblyReference.cache
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.Form1.resources
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.Properties.Resources.resources
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.csproj.GenerateResource.cache
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.csproj.CoreCompileInputs.cache
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.exe
+C:\Users\steve\Documents\Visual Studio 2022\VS2022 Projects\!!! MyLibraries !!!\DSPLib\DSPLib_Test\DSPLib_Test\obj\x64\Debug\DSPLib_Test.pdb
