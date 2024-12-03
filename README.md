@@ -13,9 +13,10 @@ DSP oriented routines released under the very non-restrictive MIT License.
   
 # Features:  
   1) 100% .NET 4 managed code (no PInvoke!)    
-  2) Uses the offical .NET 4 Complex Data type.  
-  3) Complete C# Source Code, no third party DLL's needed.  
-  4) Many worked examples.
+  2) Uses the native .NET 4 Complex Data type.  
+  3) Complete C# Source Code in one file, no third party DLL's, or other dependencies.
+  4) Fully XML commented code.
+  5) Many worked examples.
 
 # Usage:
 * See the full PDF Users guide at,  
